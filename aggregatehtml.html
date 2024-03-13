@@ -1,0 +1,282 @@
+<html>
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+        /* Ensure select elements match styling */
+        select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border-radius: 0.25rem;
+            border: 1px solid #d1d5db;
+            padding: 0.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8 font-sans">
+    <div class="max-w-2xl mx-auto">
+        <div class="bg-white p-6 rounded shadow-md">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-semibold">Courses:</h2> <br>
+				<p> Select a course, enter Z score, estimate and remember.
+                </button>
+            </div>
+
+            <!-- Course container -->
+            <div class="course-container">
+                <!-- Initial course item -->
+                <div class="mb-4">
+                    <div class="flex items-center mb-2">
+                        <button class="text-red-500 mr-2 focus:outline-none">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <select class="course-name-select border p-2 rounded w-full">
+                            <option value="">Select a course</option>
+                            <option value="Specialist Maths">Specialist Maths</option>
+                            <option value="Specialist Options">Specialist Options</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Biology">Biology</option>
+                            <option value="English">English</option>
+                            <option value="History">History</option>
+                            <option value="Business/Legal/Finance">Business/Legal/Finance</option>
+                            <option value="Economics">Economics</option>
+                            <option value="Languages beginning">Languages beginning</option>
+                            <option value="Languages Continuing">Languages Continuing</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Music">Music</option>
+                            <option value="Exercise Science">Exercise Science</option>
+                            <option value="Forestry">Forestry</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mb-2">
+                        <div>
+                            <label>Course Type:</label>
+                            <select class="w-full p-2 border rounded">
+                                <option>Major</option>
+                                <option>Minor</option>
+                                <option>H course</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center">
+                            <label class="w-1/2">VI SD:</label>
+                            <input type="number" class="vi-sd-input border p-2 rounded w-1/2" value="">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="flex items-center">
+                            <label class="w-1/2">Z score:</label>
+                            <input type="number" class="z-score-input border p-2 rounded w-1/2" value="">
+                        </div>
+                        <div>
+                            <label>Average Scaled Score:</label>
+                            <input type="number" class="average-scaled-score-input border p-2 rounded w-full" value="">
+                        </div>
+                    </div>
+                </div>
+                <!-- End of initial course item -->
+            </div>
+            <!-- End of course container -->
+
+            <div class="mt-6">
+                <button class="bg-blue-500 text-white p-2 rounded shadow aggregate-score-btn">Estimate Aggregate Score</button>
+                <span class="ml-4 font-semibold">Aggregate Score: <span class="aggregate-score-output">0</span></span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle course name selection and autofill VI SD and Average Scaled Score
+        document.querySelectorAll('.course-name-select').forEach(selectElement => {
+            selectElement.addEventListener('change', function() {
+                let viSdInput = this.closest('.mb-4').querySelector('.vi-sd-input');
+                let averageScaledScoreInput = this.closest('.mb-4').querySelector('.average-scaled-score-input');
+                
+                const courseData = {
+                    'Specialist Maths': { viSd: 23, averageScore: 177.8 },
+                    'Specialist Options': { viSd: 21.7, averageScore: 180.2 },
+                    'Physics': { viSd: 23, averageScore: 169.3 },
+                    'Chemistry': { viSd: 22.4, averageScore: 165.5 },
+                    'Biology': { viSd: 20.9, averageScore: 154.6 },
+                    'English': { viSd: 21.7, averageScore: 154.4 },
+                    'History': { viSd: 21.9, averageScore: 154.6 },
+                    'Business/Legal/Finance': { viSd: 20.7, averageScore: 153.9 },
+                    'Economics': { viSd: 20.7, averageScore: 156.4 },
+                    'Languages beginning': { viSd: 34, averageScore: 150.1 },
+                    'Languages Continuing': { viSd: 27.3, averageScore: 163.0 },
+                    'Information Technology': { viSd: 14.8, averageScore: 149.1 },
+                    'Music': { viSd: 24.4, averageScore: 148.9 },
+                    'Exercise Science': { viSd: 18.4, averageScore: 153.9 },
+                    'Forestry': { viSd: 13.7, averageScore: 157.6 }
+                };
+
+                const selectedCourse = this.value;
+                if (courseData[selectedCourse]) {
+                    viSdInput.value = courseData[selectedCourse].viSd;
+                    averageScaledScoreInput.value = courseData[selectedCourse].averageScore;
+                } else {
+                    viSdInput.value = '';
+                    averageScaledScoreInput.value = '';
+                }
+            });
+        });
+
+        // JavaScript to handle calculating aggregate score
+        document.querySelector('.aggregate-score-btn').addEventListener('click', function() {
+            const zScoreInput = document.querySelector('.z-score-input');
+            const viSdInput = document.querySelector('.vi-sd-input');
+            const averageScaledScoreInput = document.querySelector('.average-scaled-score-input');
+            const aggregateScoreOutput = document.querySelector('.aggregate-score-output');
+
+            const zScore = parseFloat(zScoreInput.value);
+            const viSd = parseFloat(viSdInput.value);
+            const averageScaledScore = parseFloat(averageScaledScoreInput.value);
+
+            const aggregateScore = averageScaledScore + zScore * viSd;
+            aggregateScoreOutput.textContent = aggregateScore.toFixed(2);
+        });
+
+        // JavaScript to handle adding a new course item
+        document.querySelectorAll('.add-item-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const courseContainer = document.querySelector('.course-container');
+                const newItem = document.createElement('div');
+                newItem.classList.add('mb-4');
+
+                newItem.innerHTML = `
+                    <div class="flex items-center mb-2">
+                        <button class="text-red-500 mr-2 focus:outline-none">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <select class="course-name-select border p-2 rounded w-full">
+                            <option value="">Select a course</option>
+                            <option value="Specialist Maths">Specialist Maths</option>
+                            <option value="Specialist Options">Specialist Options</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Biology">Biology</option>
+                            <option value="English">English</option>
+                            <option value="History">History</option>
+                            <option value="Business/Legal/Finance">Business/Legal/Finance</option>
+                            <option value="Economics">Economics</option>
+                            <option value="Languages beginning">Languages beginning</option>
+                            <option value="Languages Continuing">Languages Continuing</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Music">Music</option>
+                            <option value="Exercise Science">Exercise Science</option>
+                            <option value="Forestry">Forestry</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mb-2">
+                        <div>
+                            <label>Course Type:</label>
+                            <select class="w-full p-2 border rounded">
+                                <option>Major</option>
+                                <option>Minor</option>
+                                <option>H course</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center">
+                            <label class="w-1/2">VI SD:</label>
+                            <input type="number" class="vi-sd-input border p-2 rounded w-1/2" value="">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="flex items-center">
+                            <label class="w-1/2">Z score:</label>
+                            <input type="number" class="z-score-input border p-2 rounded w-1/2" value="">
+                        </div>
+                        <div>
+                            <label>Average Scaled Score:</label>
+                            <input type="number" class="average-scaled-score-input border p-2 rounded w-full" value="">
+                        </div>
+                    </div>
+                    <button class="text-blue-500 focus:outline-none add-item-btn">
+                        <i class="fas fa-plus"></i> Add item
+                    </button>
+                `;
+
+                courseContainer.appendChild(newItem);
+
+                // Add event listener to the new course select element
+                addCourseSelectionListener(newItem.querySelector('.course-name-select'));
+            });
+        });
+
+        // Function to add event listener for course selection
+        function addCourseSelectionListener(selectElement) {
+            selectElement.addEventListener('change', function() {
+                let viSdInput = this.closest('.mb-4').querySelector('.vi-sd-input');
+                let averageScaledScoreInput = this.closest('.mb-4').querySelector('.average-scaled-score-input');
+                
+                const courseData = {
+                    'Specialist Maths': { viSd: 23, averageScore: 177.8 },
+                    'Specialist Options': { viSd: 21.7, averageScore: 180.2 },
+                    'Physics': { viSd: 23, averageScore: 169.3 },
+                    'Chemistry': { viSd: 22.4, averageScore: 165.5 },
+                    'Biology': { viSd: 20.9, averageScore: 154.6 },
+                    'English': { viSd: 21.7, averageScore: 154.4 },
+                    'History': { viSd: 21.9, averageScore: 154.6 },
+                    'Business/Legal/Finance': { viSd: 20.7, averageScore: 153.9 },
+                    'Economics': { viSd: 20.7, averageScore: 156.4 },
+                    'Languages beginning': { viSd: 34, averageScore: 150.1 },
+                    'Languages Continuing': { viSd: 27.3, averageScore: 163.0 },
+                    'Information Technology': { viSd: 14.8, averageScore: 149.1 },
+                    'Music': { viSd: 24.4, averageScore: 148.9 },
+                    'Exercise Science': { viSd: 18.4, averageScore: 153.9 },
+                    'Forestry': { viSd: 13.7, averageScore: 157.6 }
+                };
+
+                const selectedCourse = this.value;
+                if (courseData[selectedCourse]) {
+                    viSdInput.value = courseData[selectedCourse].viSd;
+                    averageScaledScoreInput.value = courseData[selectedCourse].averageScore;
+                } else {
+                    viSdInput.value = '';
+                    averageScaledScoreInput.value = '';
+                }
+            });
+        }
+
+        // Initialize course selection listeners for existing items
+        document.querySelectorAll('.course-name-select').forEach(selectElement => {
+            addCourseSelectionListener(selectElement);
+        });
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<br>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Style for the button */
+        .button {
+            display: block;
+            width: 200px; /* Adjust width as needed */
+            margin: 0 auto; /* Center the button horizontally */
+            padding: 10px 20px; /* Adjust padding as needed */
+            background-color: #4CAF50; /* Green color */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer;
+        }
+
+        /* Hover effect */
+        .button:hover {
+            background-color: #45a049; /* Darker green color */
+        }
+    </style>
+</head>
+<body>
+	 <a href="weightedaverage.html" class="button">Back</a> <br>
+    <a href="atarcalculation.html" class="button">Next</a>
+</body>
+</html>

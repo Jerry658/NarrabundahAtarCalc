@@ -1,0 +1,118 @@
+
+<html>
+<head>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 p-8">
+  <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow">
+    <h1 class="text-2xl font-semibold mb-6">Weighted Average Calculator</h1>
+	<p> Hi, firstly you'll have to calculate your average Z score throughout the sessions. You'll use this Z score for next tab. Sorry Year 11s, wont work for you :P </p> <br>
+    <form id="calculatorForm">
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <div class="font-semibold">Data value</div>
+        <div class="font-semibold">Weight</div>
+      </div>
+      <div id="inputRows" class="grid grid-cols-2 gap-4 mb-4">
+        <!-- Six rows of input pairs for Data value and Weight -->
+        <div><input type="number" name="dataValue" class="border-2 border-gray-300 rounded w-full p-2" /></div>
+        <div><input type="number" name="weight" class="border-2 border-gray-300 rounded w-full p-2" /></div>
+        <!-- Repeat for the remaining five rows -->
+        <div><input type="number" name="dataValue" class="border-2 border-gray-300 rounded w-full p-2" /></div>
+        <div><input type="number" name="weight" class="border-2 border-gray-300 rounded w-full p-2" /></div>
+        <div><input type="number" name="dataValue" class="border-2 border-gray-300 rounded w-full p-2" /></div>
+        <div><input type="number" name="weight" class="border-2 border-gray-300 rounded w-full p-2" /></div>
+        <div><input type="number" name="dataValue" class="border-2 border-gray-300 rounded w-full p-2" /></div>
+        <div><input type="number" name="weight" class="border-2 border-gray-300 rounded w-full p-2" /></div>
+        <div><input type="number" name="dataValue" class="border-2 border-gray-300 rounded w-full p-2" /></div>
+        <div><input type="number" name="weight" class="border-2 border-gray-300 rounded w-full p-2" /></div>
+        <div><input type="number" name="dataValue" class="border-2 border-gray-300 rounded w-full p-2" /></div>
+        <div><input type="number" name="weight" class="border-2 border-gray-300 rounded w-full p-2" /></div>
+      </div>
+      <div class="flex space-x-2 mb-4">
+        <button type="button" onclick="calculateWeightedAverage()" class="bg-green-500 text-white px-4 py-2 rounded shadow">
+          <i class="fas fa-calculator"></i> Calculate
+        </button>
+        <button type="reset" class="bg-gray-300 text-black px-4 py-2 rounded shadow">
+          <i class="fas fa-times"></i> Reset
+        </button>
+        <button type="button" onclick="addRow()" class="bg-gray-300 text-black px-4 py-2 rounded shadow">
+          <i class="fas fa-plus"></i> Add Row
+        </button>
+      </div>
+      <div class="font-semibold mb-2">Weighted average</div>
+      <input type="text" id="weightedAverage" class="border-2 border-gray-300 rounded w-full p-2" readonly />
+    </form>
+  </div>
+
+  <script>
+    // Function to calculate the weighted average
+    function calculateWeightedAverage() {
+      const dataValues = document.querySelectorAll('input[name="dataValue"]');
+      const weights = document.querySelectorAll('input[name="weight"]');
+      let sumProduct = 0;
+      let sumWeight = 0;
+
+      dataValues.forEach((dataValue, index) => {
+        const weight = weights[index].valueAsNumber || 0;
+        sumProduct += (dataValue.valueAsNumber || 0) * (weight / 100);
+        sumWeight += weight;
+      });
+
+      const weightedAverage = sumWeight ? sumProduct / (sumWeight / 100) : 0;
+      document.getElementById('weightedAverage').value = weightedAverage.toFixed(2);
+    }
+
+    // Function to add a new row of inputs
+    function addRow() {
+      const inputRows = document.getElementById('inputRows');
+      const newRow = document.createElement('div');
+      newRow.className = 'grid grid-cols-2 gap-4';
+      newRow.innerHTML = `
+        <div><input type="number" name="dataValue" class="border-2 border-gray-300 rounded w-full p-2" /></div>
+        <div><input type="number" name="weight" class="border-2 border-gray-300 rounded w-full p-2" /></div>
+      `;
+      inputRows.appendChild(newRow);
+    }
+  </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<br>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Style for the button */
+        .button {
+            display: block;
+            width: 200px; /* Adjust width as needed */
+            margin: 0 auto; /* Center the button horizontally */
+            padding: 10px 20px; /* Adjust padding as needed */
+            background-color: #4CAF50; /* Green color */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer;
+        }
+
+        /* Hover effect */
+        .button:hover {
+            background-color: #45a049; /* Darker green color */
+        }
+    </style>
+</head>
+<body>
+	 <a href="homepage.html" class="button">Back</a> <br>
+    <a href="aggregatehtml.html" class="button">Next</a>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<html>
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&amp;display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://wallpapers.com/images/hd/calm-aesthetic-desktop-6iqw8jsnupwpri50.jpg');
+            background-size: 1344px 756px;
+            background-repeat: no-repeat;
+            background-color: lightblue;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .portrait-box {
+            background-color: white;
+            width: 720px;
+            padding: 20px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+<div class="container mx-auto px-4 py-8">
+    <div class="portrait-box">
+        <h1 class="font-bold text-3xl mb-6">Narrabundah Atar Calculator Endpage</h1>
+        <div class="flex justify-between items-left mb-6">
+            <div>
+                <h2 class="font-semibold text-xl mb-6">Total Aggregate Calculator</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="number" id="majorAggregate1" placeholder="Major Aggregate1" class="border border-gray-300 px-4 py-2">
+                    <input type="number" id="majorAggregate2" placeholder="Major Aggregate2" class="border border-gray-300 px-4 py-2">
+                    <input type="number" id="majorAggregate3" placeholder="Major Aggregate3" class="border border-gray-300 px-4 py-2">
+                    <input type="number" id="minorAggregate4" placeholder="Minor Aggregate4" class="border border-gray-300 px-4 py-2">
+                </div>
+                <button onclick="calculateAggregate()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded">Calculate Total Aggregate Score</button>
+            </div>
+        </div>
+        <div class="flex justify-between items-left mb-6">
+            <div>
+                <h2 class="font-semibold text-xl mb-6">Estimate ATAR</h2>
+                <input type="number" id="totalAggregate" placeholder="Enter Total Aggregate Value" class="border border-gray-300 px-4 py-2">
+                <button onclick="estimateATAR()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded">Estimate ATAR</button>
+            </div>
+        </div>
+        <div class="border-t border-b py-4 my-6">
+            <a href="https://www.bsss.act.edu.au/__data/assets/pdf_file/0003/500466/4i_Scaled_Score_and_Vi_mean_and_standard_deviation_by_course_area.pdf" class="text-blue-600 hover:underline">BSSS Year 12 Vocational Data 2018 4i: SourceOne</a><br>
+            <a href="https://www.education.act.gov.au/__data/assets/pdf_file/0006/1615128/EDU_2020_007_Document.pdf" class="text-blue-600 hover:underline">BSSS Year 12 Aggregate to Atar Data 2013: SourceTwo</a><br>
+            <a href="aggregatehtml.html" class="text-blue-600 hover:underline">Back to aggregate calculator</a> <br>
+			<a href="homepage.html" class="text-blue-600 hover:underline">Back to home page</a>
+        </div>
+        <div class="flex items-center space-x-4">
+            <i class="fas fa-user-circle fa-3x text-gray-700"></i>
+            <a href="authorbiography.html" class="text-blue-600 hover:underline">About the author</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function calculateAggregate() {
+        var majorAggregate1 = parseFloat(document.getElementById('majorAggregate1').value) || 0;
+        var majorAggregate2 = parseFloat(document.getElementById('majorAggregate2').value) || 0;
+        var majorAggregate3 = parseFloat(document.getElementById('majorAggregate3').value) || 0;
+        var minorAggregate4 = parseFloat(document.getElementById('minorAggregate4').value) || 0;
+
+        var totalAggregate = majorAggregate1 + majorAggregate2 + majorAggregate3 + 0.6 * minorAggregate4;
+
+        alert('Total Aggregate Score: ' + totalAggregate);
+    }
+
+    function estimateATAR() {
+        var totalAggregate = parseFloat(document.getElementById('totalAggregate').value) || 0;
+
+        var aggregateToATAR = {
+            807.4: 99.95,
+            782.1: 99.9,
+            768.7: 99.85,
+            766.2: 99.8,
+            759.3: 99.75,
+            756.8: 99.7,
+            753.9: 99.65,
+            748.5: 99.6,
+            746.1: 99.55,
+            744.8: 99.5,
+            739.4: 99.45,
+            738.8: 99.4,
+            737.9: 99.35,
+            736.8: 99.3,
+            735: 99.25,
+            733.6: 99.2,
+            732.9: 99.15,
+            730.7: 99.1,
+            7274: 99,
+            727: 98.95,
+            725.8: 98.9,
+            724.7: 98.85,
+            722.2: 98.8,
+            720.6: 98.75,
+            719.6: 98.7,
+            717.4: 98.6,
+            715.4: 98.5,
+            714.9: 98.45,
+            713.7: 98.4,
+            711.6: 98.35,
+            710.9: 98.3,
+            709.4: 98.25,
+            708.8: 98.2,
+            705.3: 98.05,
+            704.9: 98,
+            703.9: 97.9,
+            702.7: 97.85,
+            701.7: 97.8,
+            699.5: 97.75,
+            698.9: 97.7,
+            697.9: 97.65,
+            696.7: 97.6,
+            695.4: 97.55,
+            695: 97.5,
+            692.9: 97.4,
+            691.9: 97.35,
+            690.7: 97.3,
+            689.9: 97.15,
+            687.9: 97.05,
+            686.4: 97,
+            685.7: 96.9,
+            684.8: 96.8,
+            683.8: 96.7,
+            682.8: 96.55,
+            681.9: 96.45,
+            680.7: 96.4,
+            679.8: 96.3,
+            679: 96.2,
+            676.3: 96.1,
+            674.9: 96,
+            673.9: 95.95,
+            673: 95.9,
+            671.9: 95.85,
+            670.9: 95.7,
+            669.8: 95.6,
+            669: 95.55,
+            668: 95.45,
+            667: 95.25,
+            665.9: 95.1,
+            664.9: 95,
+            664: 94.9,
+            662.3: 94.8,
+            661.9: 94.65,
+            660.9: 94.6,
+            660: 94.45,
+            659: 94.3,
+            658: 94.15,
+            656.9: 94.1,
+            655.7: 94.05,
+            654.9: 94,
+            653.7: 93.9,
+            653: 93.8,
+            652: 93.75,
+            649.9: 93.7,
+            648.8: 93.55,
+            647.9: 93.45,
+            646.9: 93.35,
+            645.9: 93.25,
+            645: 93.15,
+            643.6: 92.95,
+            642.6: 92.9,
+            641.9: 92.8,
+            641: 92.75,
+            640: 92.55,
+            638.6: 92.4,
+            637.7: 92.35,
+            636.8: 92.3,
+            635.7: 92.2,
+            634.8: 92.05,
+            634: 92,
+            632.9: 91.85,
+            631.8: 91.75,
+            630.9: 91.6,
+            629.9: 91.4,
+            629: 91.3,
+            628: 91.15,
+            626.9: 91.05,
+            626: 91,
+            625: 90.85,
+            623.9: 90.75,
+            622.9: 90.65,
+            621.9: 90.5,
+            620.8: 90.35,
+            620: 90.15,
+            618.8: 90.05,
+            617.9: 89.9,
+            616.8: 89.8,
+            616: 89.7,
+            614.9: 89.55,
+            614: 89.45,
+            613: 89.3,
+            611.7: 89.2,
+            610.9: 89.1,
+            610: 88.95,
+            608.8: 88.85,
+            607.7: 88.6,
+            606.9: 88.5,
+            605.9: 88.3,
+            604.9: 88.15,
+            603.9: 88,
+            602.8: 87.9,
+            602: 87.7,
+            600.8: 87.55,
+            600: 87.4,
+            598.9: 87.3,
+            597.9: 87.1,
+            596.8: 87,
+            595.9: 86.85,
+            595: 86.75,
+            593.9: 86.55,
+            592.8: 86.35,
+            592: 86.15,
+            591: 86,
+            590: 85.8,
+            589: 85.7,
+            587.8: 85.5,
+            587: 85.3,
+            585.9: 85.15,
+            584.9: 84.9,
+            584: 84.8,
+            583: 84.6,
+            581.9: 84.5,
+            581: 84.3,
+            580: 84.15
+        };
+
+        var closestAggregate = Object.keys(aggregateToATAR).reduce(function(prev, curr) {
+            return Math.abs(curr - totalAggregate) < Math.abs(prev - totalAggregate) ? curr : prev;
+        });
+
+        if (aggregateToATAR[closestAggregate]) {
+            alert('Estimated ATAR: ' + aggregateToATAR[closestAggregate]);
+        } else {
+            alert('Error, your estimated ATAR is below the Narrabundah Mean');
+        }
+    }
+</script>
+
+</body>
+</html>
