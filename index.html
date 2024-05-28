@@ -1,100 +1,290 @@
-<!DOCTYPE html>
-<html>
- <head>
-  <meta name="google-site-verification" content="DlP5RTR7AMX3I_dr5JUwZZGWi9v_vYf74BVJEQUG0pg" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <style>
-   body {
-      background-image: url('https://wallpapers.com/images/hd/calm-aesthetic-desktop-6iqw8jsnupwpri50.jpg');
-      background-size: 1400px 826px;
-      background-repeat: no-repeat;
-      background-color: lightblue;
-      font-family: serif;
-   }
-   .portrait-box {
-      background-color: white;
-      width: 720px;
-      padding: 20px;
-      margin: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-   }
-  </style>
- </head>
- <body>
-  <div class="container mx-auto px-4 py-8">
-   <div class="portrait-box">
-   	    <img src="https://www.narrabundahc.act.edu.au/__data/assets/image/0005/481541/NARRABUNDAH.png" alt="Narrabundah College" style="display: block; margin: 0 auto; height = "400" width = "400"> <br>
-    <h1 style="font-size: 24px;" class="font-bold mb-6">
-    Narrabundah Atar Calculator Homepage
-</h1>
-    <div class="flex justify-between items-left mb-6">
-     <div>
-      <h2 style="font-size: 16px;" class="font-semibold mb-6">
-    Background Context
-</h2>
-      <p class="mt-2">
-       Narrabundah College delivers a senior secondary curriculum to 950+ year 11 and 12 students. Narrabundah College has a cultural and academic rich community. The college prides itself on providing a high level of support towards each student's learning Journey. We are proud to say Narrabundah College has been topping the ACT for the past 5 years.
-      </p>
-      <p class="mt-4">
-       <span class="font-semibold">
-        Note by Author:
-       </span>
-       FYI this calculation are not confirmed by BSSS or the school itself. It's prediction is rough and approximately 82% accurate. Your final ATAR will be heavily influenced by your school's AST (ACT Scaling Test) performance. As well as this, this site does not require a login and is completely anonymous, we completely respect your right to privacy. Also don't worry this site is ad-free, zero profit, because I'm broke :( I created this in one week. My Goal: Advanced Computing in UNSW. Google please hire me!
-      </p>
 <html lang="en">
 <head>
-<br>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Days</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        /* Style for the button */
-        .button {
-            display: block;
-            width: 200px; /* Adjust width as needed */
-            margin: 0 auto; /* Center the button horizontally */
-            padding: 10px 20px; /* Adjust padding as needed */
-            background-color: #4CAF50; /* Green color */
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px; /* Rounded corners */
-            cursor: pointer;
-        }
-
-        /* Hover effect */
-        .button:hover {
-            background-color: #45a049; /* Darker green color */
-        }
+        .font-arial { font-family: Arial, sans-serif; }
+        .font-georgia { font-family: Georgia, serif; }
+        .font-verdana { font-family: Verdana, sans-serif; }
+        .font-courier { font-family: Courier, monospace; }
     </style>
 </head>
-<body>
-    <a href="indexfour.html" class="button">Get Started</a>
+<body class="bg-gray-50">
+    <header class="flex justify-between items-center p-4">
+        <div class="flex items-center space-x-2">
+            <img alt="MasterYang logo" class="w-10 h-10" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Yin_and_Yang_symbol.svg/1200px-Yin_and_Yang_symbol.svg.png" width="40" height="40"/>
+            <h1 class="text-2xl font-bold">MasterYang</h1>
+        </div>
+        <i class="fas fa-bars text-2xl"></i>
+    </header>
+    <main class="text-center mt-10">
+        <h2 class="text-4xl font-bold text-gray-800">Happy Days – Free Wisdom Generator</h2>
+        <p class="text-gray-500 mt-4">Happy Days is a simple tool that helps you generate wise quotes or compliments to brighten someone's day. Use it for your friends, family, or even yourself!</p>
+    </main>
+    <section class="flex justify-center mt-10 space-x-4">
+        <div class="bg-blue-500 text-white p-6 rounded-lg shadow-lg w-64">
+            <h3 class="text-xl font-bold mb-4">Quote Variety</h3>
+			 <select id="buttontext" class="bg-blue-300 p-4 rounded-lg w-full">
+                <option value="font-arial">Good</option>
+                <option value="font-georgia">Very Good</option>
+                <option value="font-verdana">Great</option>
+                <option value="font-courier">Nice</option>
+            </select>
+        </div>
+        <div class="flex flex-col justify-center items-center">
+            <button id="generateButton" class="bg-green-700 text-white py-3 px-6 rounded-lg shadow-lg text-lg">Generate</button>
+            <div class="flex space-x-2 mt-4">
+                <button class="text-blue-500" onclick="undo()"><i class="fas fa-undo"></i> Undo</button>
+                <button class="text-blue-500" onclick="redo()"><i class="fas fa-redo"></i> Redo</button>
+            </div>
+        </div>
+        <div class="bg-blue-500 text-white p-6 rounded-lg shadow-lg w-64">
+            <h3 class="text-xl font-bold mb-4">Button style</h3>
+            <select id="buttonStyle" class="bg-blue-300 p-4 rounded-lg w-full">
+                <option value="font-arial">Arial</option>
+                <option value="font-georgia">Georgia</option>
+                <option value="font-verdana">Verdana</option>
+                <option value="font-courier">Courier</option>
+            </select>
+        </div>
+    </section>
+    <section class="text-center mt-10">
+        <div id="compliment" class="text-2xl font-bold"></div>
+    </section>
+    <script>
+        const compliments = [
+            "Your smile looks beautiful today.",
+            "When there's a will, there's a way.",
+            "You have a great sense of humor.",
+            "Hard work pays off.",
+            "Your positivity is infectious.",
+            "Dreams come true when we believe.",
+            "You are an amazing friend.",
+            "The best is yet to come.",
+            "Your kindness makes the world a better place.",
+            "Believe in yourself and all that you are.",
+            "Your creativity is inspiring.",
+            "Success is not the key to happiness. Happiness is the key to success.",
+            "You light up the room.",
+            "With every challenge comes opportunity.",
+            "You have a heart of gold.",
+            "Every day is a new beginning.",
+            "Your courage is admirable.",
+            "The sky's the limit.",
+            "You are a breath of fresh air.",
+            "Life is what you make it.",
+            "You have a brilliant mind.",
+            "Good things take time.",
+            "You are a true gem.",
+            "Positivity always wins.",
+            "You are a natural leader.",
+            "Love is the answer.",
+            "You have a great taste in fashion.",
+            "Stay strong and carry on.",
+            "You are incredibly talented.",
+            "Happiness is a choice.",
+            "Your laughter is music to my ears.",
+            "Every day is a new opportunity.",
+            "You make the world a better place.",
+            "Embrace the glorious mess that you are.",
+            "You are full of wisdom.",
+            "Gratitude changes everything.",
+            "Your spirit is unbreakable.",
+            "Nothing is impossible.",
+            "You have a beautiful soul.",
+            "Life is a journey, not a destination.",
+            "Your determination is remarkable.",
+            "The best is yet to come.",
+            "You are a ray of sunshine.",
+            "Kindness is free, sprinkle it everywhere.",
+            "You have an incredible energy.",
+            "Success is a journey, not a destination.",
+            "You are unique and special.",
+            "Change is the only constant.",
+            "You have a wonderful way with words.",
+            "Believe you can and you're halfway there.",
+            "You are a great listener.",
+            "The future belongs to those who believe in the beauty of their dreams.",
+            "You are an inspiration to many.",
+            "Keep your face always toward the sunshine—and shadows will fall behind you.",
+            "You have a magnetic personality.",
+            "Life is what happens when you're busy making other plans.",
+            "You are a gift to those around you.",
+            "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+            "You are full of life.",
+            "What we think, we become.",
+            "You have a generous heart.",
+            "Do what you can, with what you have, where you are.",
+            "You are a true original.",
+            "Life is short, make it sweet.",
+            "You have a great sense of style.",
+            "The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate.",
+            "You are destined for greatness.",
+            "To live is the rarest thing in the world. Most people exist, that is all.",
+            "You are incredibly brave.",
+            "Life is really simple, but we insist on making it complicated.",
+            "You are a shining star.",
+            "Our lives begin to end the day we become silent about things that matter.",
+            "You are a beacon of light.",
+            "The only limit to our realization of tomorrow is our doubts of today.",
+            "You have an incredible presence.",
+            "The only impossible journey is the one you never begin.",
+            "You are a miracle.",
+            "Life is 10% what happens to us and 90% how we react to it.",
+            "You are a wonderful human being.",
+            "Happiness is not something ready-made. It comes from your own actions.",
+            "You have a radiant personality.",
+            "Life is like riding a bicycle. To keep your balance, you must keep moving.",
+            "You are a true visionary.",
+            "The best way to predict your future is to create it.",
+            "You are an angel.",
+            "Life isn't about finding yourself. Life is about creating yourself.",
+            "You have a heartwarming smile.",
+            "You miss 100% of the shots you don't take.",
+            "You are a joy to be around.",
+            "Life is either a daring adventure or nothing at all.",
+            "You are a work of art.",
+            "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.",
+            "You are a source of joy.",
+            "Life is what you make of it.",
+            "You have a beautiful mind.",
+            "The only way to do great work is to love what you do.",
+            "You are a blessing to those around you.",
+            "Life's most persistent and urgent question is, 'What are you doing for others?'",
+            "You have an incredible sense of empathy.",
+            "Life is short, and it is up to you to make it sweet.",
+            "You are an amazing person.",
+            "The journey of a thousand miles begins with one step.",
+            "You have a lovely voice.",
+            "You must be the change you wish to see in the world.",
+            "You are a true friend.",
+            "Life is really simple, but we insist on making it complicated.",
+            "You have a remarkable soul.",
+            "The best way to find yourself is to lose yourself in the service of others.",
+            "You are a treasure.",
+            "The future belongs to those who believe in the beauty of their dreams.",
+            "You are full of potential.",
+            "Life is a series of moments, live each one to the fullest.",
+            "You are a true gift.",
+            "Keep your face always toward the sunshine—and shadows will fall behind you.",
+            "You are incredibly thoughtful.",
+            "Life is not measured by the number of breaths we take, but by the moments that take our breath away.",
+            "You have a charming personality.",
+            "You must do the things you think you cannot do.",
+            "You are a bright light in a dark world.",
+            "Life is what we make it, always has been, always will be.",
+            "You are a true joy.",
+            "The best way to predict the future is to invent it.",
+            "You have a calming presence.",
+            "Life is a succession of lessons which must be lived to be understood.",
+            "You are a wonderful soul.",
+            "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+            "You are full of grace.",
+            "Life is really simple, but we insist on making it complicated.",
+            "You have an infectious laugh.",
+            "The only way to do great work is to love what you do.",
+            "You are incredibly wise.",
+            "Life is 10% what happens to us and 90% how we react to it.",
+            "You have a beautiful heart.",
+            "To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.",
+            "You are an amazing soul.",
+            "Life is not measured by the number of breaths we take, but by the moments that take our breath away.",
+            "You are a source of inspiration.",
+            "The journey of a thousand miles begins with one step.",
+            "You are full of life.",
+            "Life is a series of moments, live each one to the fullest.",
+            "You have a gentle spirit.",
+            "The only limit to our realization of tomorrow is our doubts of today.",
+            "You are a breath of fresh air.",
+            "Life is what happens when you're busy making other plans.",
+            "You are a true gem.",
+            "The best way to predict the future is to invent it.",
+            "You have an incredible mind.",
+            "Life is not about waiting for the storm to pass, but learning to dance in the rain.",
+            "You are a wonderful person.",
+            "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+            "You are full of love.",
+            "Life is what you make it.",
+            "You have a radiant energy.",
+            "The best way to find yourself is to lose yourself in the service of others.",
+            "You are an inspiration to many.",
+            "Life is a journey, not a destination.",
+            "You have a kind heart.",
+            "The future belongs to those who believe in the beauty of their dreams.",
+            "You are a source of strength.",
+            "Life is really simple, but we insist on making it complicated.",
+            "You have a positive attitude.",
+            "The only way to do great work is to love what you do.",
+            "You are a beacon of hope.",
+            "Life is what we make it, always has been, always will be.",
+            "You have a beautiful soul.",
+            "The greatest glory in living lies not in never falling, but in rising every time we fall.",
+            "You are full of potential.",
+            "Life is not measured by the number of breaths we take, but by the moments that take our breath away.",
+            "You have a warm personality.",
+            "The best way to predict the future is to invent it.",
+            "You are a true friend.",
+            "Life is really simple, but we insist on making it complicated.",
+            "You have an amazing spirit.",
+            "The only way to do great work is to love what you do.",
+            "You are incredibly kind.",
+            "Life is 10% what happens to us and 90% how we react to it.",
+            "You have a brilliant mind.",
+            "Your humor is delightful.",
+            "You are a wonderful mentor.",
+            "Your wisdom is a gift.",
+            "You are a source of inspiration.",
+            "Your kindness is extraordinary.",
+            "You have a radiant soul.",
+            "Your joy is infectious.",
+            "You are a true blessing.",
+            "Your dedication is inspiring.",
+            "You are a beautiful spirit.",
+            "Your warmth is inviting.",
+            "You have a gift for making people feel special.",
+            "You are a beacon of hope.",
+            "Your grace is unparalleled.",
+            "You are a beautiful soul.",
+            "Your love is a powerful force."
+        ];
+
+        let history = [];
+        let historyIndex = -1;
+
+        document.getElementById('generateButton').addEventListener('click', () => {
+            const buttonStyle = document.getElementById('buttonStyle').value;
+            const randomCompliment = compliments[Math.floor(Math.random() * compliments.length)];
+
+            const complimentElement = document.getElementById('compliment');
+            complimentElement.className = `${buttonStyle} text-2xl font-bold`;
+            complimentElement.textContent = `"${randomCompliment}"`;
+
+            history.push({ text: randomCompliment, style: buttonStyle });
+            historyIndex = history.length - 1;
+        });
+
+        function undo() {
+            if (historyIndex > 0) {
+                historyIndex--;
+                const { text, style } = history[historyIndex];
+                const complimentElement = document.getElementById('compliment');
+                complimentElement.className = `${style} text-2xl font-bold`;
+                complimentElement.textContent = `"${text}"`;
+            }
+        }
+
+        function redo() {
+            if (historyIndex < history.length - 1) {
+                historyIndex++;
+                const { text, style } = history[historyIndex];
+                const complimentElement = document.getElementById('compliment');
+                complimentElement.className = `${style} text-2xl font-bold`;
+                complimentElement.textContent = `"${text}"`;
+            }
+        }
+    </script>
 </body>
-</html>
-     </div>
-    </div>
-    <div class="border-t border-b py-4 my-6">
-     <a class="text-blue-600 hover:underline" href="https://www.bsss.act.edu.au/__data/assets/pdf_file/0003/500466/4i_Scaled_Score_and_Vi_mean_and_standard_deviation_by_course_area.pdf">
-      BSSS Year 12 Vocational Data 2020 4i: SourceOne
-     </a>
-     <br/>
-     <a class="text-blue-600 hover:underline" href="https://www.education.act.gov.au/__data/assets/pdf_file/0006/1615128/EDU_2020_007_Document.pdf">
-      BSSS Year 12 Aggregate to Atar Data 2020: SourceTwo
-     </a>
-     <br/>
-     <a class="text-blue-600 hover:underline" href="https://www.narrabundahc.act.edu.au/">
-      Visit Narrabundah College
-     </a>
-    </div>
-    <div class="flex items-center space-x-4">
-     <i class="fas fa-user-circle fa-3x text-gray-700"></i>
-     <a class="text-blue-600 hover:underline" href="indexfive.html">About the author</a>
-    </div>
-   </div>
-  </div>
- </body>
 </html>
